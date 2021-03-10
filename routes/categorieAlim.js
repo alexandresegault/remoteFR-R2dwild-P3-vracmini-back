@@ -9,7 +9,7 @@ app.use(express.urlencoded({
 }))
 
 router.get('/api/aux_fourneaux/categorie_aliments', (req, res) => {
-    connection.query("SELECT * FROM Categorie_aliments", (err, results) => {
+    connection.query("SELECT * FROM categorie_aliments", (err, results) => {
         if (err) {
           res.status(500).send("Error retrieving data");
         } else {

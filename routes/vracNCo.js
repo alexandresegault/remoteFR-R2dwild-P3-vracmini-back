@@ -9,7 +9,7 @@ app.use(express.urlencoded({
 }))
 
 router.get('/api/vracn_co', (req, res) => {
-    connection.query("SELECT * FROM Vracn_co ", (err, results) => {
+    connection.query("SELECT * FROM vracn_co ", (err, results) => {
         if (err) {
           res.status(500).send("Error retrieving data");
         } else {
@@ -17,5 +17,5 @@ router.get('/api/vracn_co', (req, res) => {
         }
     })
   })
-  
+
 module.exports = router

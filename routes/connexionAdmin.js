@@ -9,7 +9,7 @@ app.use(express.urlencoded({
 }))
 
 router.get('/api/connexion_admin', (req, res) => {
-    connection.query("SELECT * FROM Connexion_admin", (err, results) => {
+    connection.query("SELECT * FROM connexion_admin", (err, results) => {
         if (err) {
           res.status(500).send("Error retrieving data");
         } else {

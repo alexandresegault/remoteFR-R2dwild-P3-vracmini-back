@@ -9,7 +9,7 @@ app.use(express.urlencoded({
 }))
 
 router.get('/api/contact', (req, res) => {
-    connection.query("SELECT * FROM Contact ", (err, results) => {
+    connection.query("SELECT * FROM contact ", (err, results) => {
         if (err) {
           res.status(500).send("Error retrieving data");
         } else {
