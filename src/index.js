@@ -1,7 +1,19 @@
 const express = require('express')
-const connection = require('../../../../other/quest-express-01/src/config')
+const connection = require('../src/config')
 const app = express()
 const routes = require('././routes/index')
+const port = 3000
+
+connection.connect(function (err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+  console.log('connected as id ' + connection.threadId);
+});
+app.listen(port, () => {
+  console.log(`Server is runing on 3000`);
+});
 
 app.use(express.json())
 app.use(express.urlencoded({

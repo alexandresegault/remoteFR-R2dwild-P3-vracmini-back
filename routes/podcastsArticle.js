@@ -1,5 +1,5 @@
 const express = require('express')
-const connection = require('../../../../other/quest-express-01/src/config')
+const connection = require('../src/config')
 const app = express()
 const router = express.Router()
 
