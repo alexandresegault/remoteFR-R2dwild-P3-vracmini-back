@@ -8,7 +8,7 @@ app.use(express.urlencoded({
   extended: true
 }))
 
-router.get('/api/contact', (req, res) => {
+router.get('/', (req, res) => {
     connection.query("SELECT * FROM contact ", (err, results) => {
         if (err) {
           res.status(500).send("Error retrieving data");

@@ -8,7 +8,7 @@ app.use(express.urlencoded({
   extended: true
 }))
 
-router.get('/api/aux_fourneaux', (req, res) => {
+router.get('/', (req, res) => {
     connection.query("SELECT * FROM aux_fourneaux", (err, results) => {
         if (err) {
           res.status(500).send("Error retrieving data");

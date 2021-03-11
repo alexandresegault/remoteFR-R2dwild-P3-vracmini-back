@@ -8,7 +8,7 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-router.get('/api/vrac-ensemble', (req, res) => {
+router.get('/', (req, res) => {
     connection.query("SELECT * FROM vrac-ensemble ", (err, results) => {
         if (err) {
             res.status(500).send("Error retrieving data");

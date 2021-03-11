@@ -1,28 +1,18 @@
 const express = require('express')
 const connection = require('../src/config')
-const app = express()
 const aboutUs = require('./aboutUs')
 const aliments = require('./aliments')
 const auxFourneaux = require('./aboutUs')
 const categorieAlim = require('./categorieAlim')
 const categorieRecettes = require('./categorieRecettes')
-const catPodArticle = require('./catPodArticle')
+const categoriePodcastArticle = require('./categoriePodcastArticle')
 const connexionAdmin = require('./connexionAdmin')
 const contact = require('./connexionAdmin')
-const interCategoriePodArt = require('./interCategoriePodArt')
+const interCategoriePodcastArticle = require('./interCategoriePodcastArticle')
 const podcastArticle = require('./podcastsArticle')
 const recettes = require('./recettes')
 const vracEnsemble = require('./vracEnsemble')
 const vracNCo = require('./vracNCo')
-
-app.use(express.json())
-app.use(express.urlencoded({
-    extended: true
-}))
-
-app.get('/', (req, res) => {
-    res.send('Chicken World!')
-})
 
 module.exports = {
     aboutUs,
@@ -30,10 +20,10 @@ module.exports = {
     auxFourneaux,
     categorieAlim,
     categorieRecettes,
-    catPodArticle,
+    categoriePodcastArticle,
     connexionAdmin,
     contact,
-    interCategoriePodArt,
+    interCategoriePodcastArticle,
     podcastArticle,
     recettes,
     vracEnsemble,

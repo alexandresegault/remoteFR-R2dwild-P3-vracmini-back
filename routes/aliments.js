@@ -7,7 +7,7 @@ app.use(express.json())
 app.use(express.urlencoded({
   extended: true
 }))
-router.get('/api/aux_fourneaux/categorie_aliments/aliments', (req, res) => {
+router.get('/', (req, res) => {
     connection.query("SELECT * FROM aliments", (err, results) => {
         if (err) {
           res.status(500).send("Error retrieving data");
