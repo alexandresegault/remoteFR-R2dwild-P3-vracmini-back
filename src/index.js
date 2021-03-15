@@ -2,6 +2,7 @@ const express = require('express')
 const connection = require('../src/config')
 const app = express()
 const routes = require('../routes/index')
+const cors = require('cors')
 const port = 4242;
 
 connection.connect(function (err) {
@@ -17,6 +18,7 @@ app.use(express.json())
 app.use(express.urlencoded({
   extended: true
 }))
+app.use(cors("*"))
 
 
 app.use('/api/about_us', routes.aboutUs, function(req, res, next){

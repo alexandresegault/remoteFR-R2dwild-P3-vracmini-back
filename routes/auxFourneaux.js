@@ -8,6 +8,7 @@ app.use(express.urlencoded({
   extended: true
 }))
 
+
 router.get('/', (req, res) => {
     connection.query("SELECT * FROM aux_fourneaux", (err, results) => {
         if (err) {
