@@ -9,7 +9,7 @@ const categoriePodcastArticle = require('./categoriePodcastArticle')
 const connexionAdmin = require('./connexionAdmin')
 const contact = require('./contact')
 const interCategoriePodcastArticle = require('./interCategoriePodcastArticle')
-const podcastArticle = require('./podcastArticle')
+const podcastsArticle = require('./podcastsArticle')
 const recettes = require('./recettes')
 const vracEnsemble = require('./vracEnsemble')
 const vracNCo = require('./vracNCo')
@@ -24,7 +24,7 @@ module.exports = {
     connexionAdmin,
     contact,
     interCategoriePodcastArticle,
-    podcastArticle,
+    podcastsArticle,
     recettes,
     vracEnsemble,
     vracNCo

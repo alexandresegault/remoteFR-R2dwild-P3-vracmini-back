@@ -46,7 +46,7 @@ app.use('/api/contact', routes.contact, function(req, res, next){
 app.use('/api/inter_categorie_pod_art', routes.interCategoriePodcastArticle, function(req, res, next){
   next()
 })
-app.use('/api/categorie_podcast_article/podcasts_article', routes.podcastArticle, function(req, res, next){
+app.use('/api/categorie_podcast_article/podcasts_article', routes.podcastsArticle, function(req, res, next){
   next()
 })
 app.use('/api/aux_fourneaux/categorie_recettes/recettes', routes.recettes, function(req, res, next){
