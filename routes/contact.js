@@ -4,17 +4,19 @@ const app = express()
 const router = express.Router()
 
 app.use(express.json())
-app.use(express.urlencoded({
-  extended: true
-}))
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+)
 
 router.get('/', (req, res) => {
-    connection.query("SELECT * FROM contact ", (err, results) => {
-        if (err) {
-          res.status(500).send("Error retrieving data");
-        } else {
-          res.status(200).json(results);
-        }
-    })
+  connection.query('SELECT * FROM contact ', (err, results) => {
+    if (err) {
+      res.status(500).send('Error retrieving data')
+    } else {
+      res.status(200).json(results)
+    }
   })
-  module.exports = router
+})
+module.exports = router

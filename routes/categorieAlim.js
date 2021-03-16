@@ -4,18 +4,20 @@ const router = express.Router()
 const app = express()
 
 app.use(express.json())
-app.use(express.urlencoded({
-  extended: true
-}))
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+)
 
 router.get('/', (req, res) => {
-    connection.query("SELECT * FROM categorie_aliments", (err, results) => {
-        if (err) {
-          res.status(500).send("Error retrieving data");
-        } else {
-          res.status(200).json(results);
-        }
-    })
+  connection.query('SELECT * FROM categorie_aliments', (err, results) => {
+    if (err) {
+      res.status(500).send('Error retrieving data')
+    } else {
+      res.status(200).json(results)
+    }
   })
+})
 
-  module.exports = router
+module.exports = router
