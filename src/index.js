@@ -1,9 +1,9 @@
 const express = require('express')
-const connection = require('../src/config')
-const app = express()
-const routes = require('../routes/index')
 const cors = require('cors')
+const connection = require('../src/config')
+const routes = require('../routes/index')
 const port = 4242
+const app = express()
 
 connection.connect(function (err) {
   if (err) {
@@ -13,6 +13,7 @@ connection.connect(function (err) {
   console.log('connected as id ' + connection.threadId)
 })
 
+app.use(cors('*'))
 app.use(express.json())
 app.use(
   express.urlencoded({
@@ -65,13 +66,7 @@ app.use(
 app.use('/api/contact', routes.contact, function (req, res, next) {
   next()
 })
-app.use(
-  '/api/inter_categorie_pod_art',
-  routes.interCategoriePodcastArticle,
-  function (req, res, next) {
-    next()
-  }
-)
+
 app.use(
   '/api/categorie_podcast_article/podcasts_article',
   routes.podcastsArticle,
@@ -86,9 +81,7 @@ app.use(
     next()
   }
 )
-app.use('/api/vrac-ensemble', routes.vracEnsemble, function (req, res, next) {
-  next()
-})
+
 app.use('/api/vracn_co', routes.vracNCo, function (req, res, next) {
   next()
 })
