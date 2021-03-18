@@ -5,13 +5,6 @@ const routes = require('../routes/index')
 const port = 4242
 const app = express()
 
-connection.connect(function (err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack)
-    return
-  }
-  console.log('connected as id ' + connection.threadId)
-})
 
 app.use(cors('*'))
 app.use(express.json())
@@ -20,6 +13,16 @@ app.use(
     extended: true
   })
 )
+
+connection.connect(function (err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack)
+    return
+  }
+  console.log('connected as id ' + connection.threadId)
+})
+
+
 
 app.use('/api/about_us', routes.aboutUs, function (req, res, next) {
   next()
@@ -65,13 +68,7 @@ app.use(
 app.use('/api/contact', routes.contact, function (req, res, next) {
   next()
 })
-app.use(
-  '/api/inter_categorie_pod_art',
-  routes.interCategoriePodcastArticle,
-  function (req, res, next) {
-    next()
-  }
-)
+
 app.use(
   '/api/categorie_podcast_article/podcasts_article',
   routes.podcastArticle,
@@ -86,9 +83,7 @@ app.use(
     next()
   }
 )
-app.use('/api/vrac-ensemble', routes.vracEnsemble, function (req, res, next) {
-  next()
-})
+
 app.use('/api/vracn_co', routes.vracNCo, function (req, res, next) {
   next()
 })

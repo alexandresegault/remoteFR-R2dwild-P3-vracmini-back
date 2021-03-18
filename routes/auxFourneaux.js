@@ -4,7 +4,7 @@ const router = express.Router()
 
 router.get('/', (req, res) => {
   connection.query('SELECT * FROM aux_fourneaux', (err, results) => {
-    // console.log('sdfsdfsd')
+    
     if (err) {
       res.status(500).send('Error retrieving data')
     } else {
