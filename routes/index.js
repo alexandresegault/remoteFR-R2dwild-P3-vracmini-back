@@ -15,17 +15,17 @@ const vracEnsemble = require('./vracEnsemble')
 const vracNCo = require('./vracNCo')
 
 module.exports = {
-    aboutUs,
-    aliments,
-    auxFourneaux,
-    categorieAlim,
-    categorieRecettes,
-    categoriePodcastArticle,
-    connexionAdmin,
-    contact,
-    interCategoriePodcastArticle,
-    podcastsArticle,
-    recettes,
-    vracEnsemble,
-    vracNCo
+  aboutUs,
+  aliments,
+  auxFourneaux,
+  categorieAlim,
+  categorieRecettes,
+  categoriePodcastArticle,
+  connexionAdmin,
+  contact,
+  interCategoriePodcastArticle,
+  podcastsArticle,
+  recettes,
+  vracEnsemble,
+  vracNCo
 }
