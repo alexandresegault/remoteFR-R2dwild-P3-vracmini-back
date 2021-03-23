@@ -36,6 +36,7 @@ router.post('/', (req, res) => {
     }
   )
 })
+
 router.put('/:id', (req, res) => {
   const id = req.params.id
   const newName = req.body
@@ -52,6 +53,7 @@ router.put('/:id', (req, res) => {
     }
   )
 })
+
 router.delete('/:id', (req, res) => {
   const idRecipe = req.params.id
   connection.query(
