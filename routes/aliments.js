@@ -11,6 +11,7 @@ app.use(
 )
 
 router.get('/', (req, res) => {
+
   let sql = 'SELECT * FROM aliments'
   const sqlValues = []
   if (req.query.categories_aliments_id) {
@@ -18,6 +19,7 @@ router.get('/', (req, res) => {
     sqlValues.push(req.query.categories_aliments_id)
   }
   connection.query(sql, sqlValues, (err, results) => {
+
     if (err) {
       res.status(500).send('Error retrieving data')
     } else {
@@ -25,6 +27,7 @@ router.get('/', (req, res) => {
     }
   })
 })
+
 
 router.get('/:id', (req, res) => {
   const alimentId = req.params.id
@@ -42,5 +45,6 @@ router.get('/:id', (req, res) => {
     }
   )
 })
+
 
 module.exports = router
