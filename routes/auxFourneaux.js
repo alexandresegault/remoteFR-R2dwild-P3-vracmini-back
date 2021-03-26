@@ -12,9 +12,9 @@ router.get('/', (req, res) => {
   })
 })
 
-router.put('/', (req, res) => {
+router.put('/:id', (req, res) => {
   const newPage = req.body
-  const id = 1
+  const id = req.params.id
   connection.query(
     'UPDATE aux_fourneaux SET ? WHERE id = ?',
     [newPage, id],
