@@ -74,13 +74,7 @@ app.use(
     next()
   }
 )
-app.use(
-  '/api/aux_fourneaux/categorie_recipes/recipes',
-  routes.recipes,
-  function (req, res, next) {
-    next()
-  }
-)
+
 app.use(
   '/api/aux_fourneaux/recipes',
   routes.recipes,

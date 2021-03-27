@@ -34,6 +34,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   connection.query('INSERT INTO recipes SET ?', req.body, (err, results) => {
     if (err) {
+      console.log(err)
       res.status(500).send('Error adding data')
     } else {
       res.status(200).json(results)

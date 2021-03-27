@@ -22,10 +22,9 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { name } = req.body
   connection.query(
-    'INSERT INTO categorie_recipes(name) VALUES (?)',
-    [name],
+    'INSERT INTO categorie_recipes SET ?',
+    req.body,
     (err, result) => {
       if (err) {
         console.log(err)
