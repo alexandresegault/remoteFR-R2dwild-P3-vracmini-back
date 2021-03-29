@@ -22,18 +22,14 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  connection.query(
-    'INSERT INTO categories_recipes SET ?',
-    req.body,
-    (err, result) => {
-      if (err) {
-        console.log(err)
-        res.status(500).send('Error adding recipes')
-      } else {
-        res.status(200).send('Success adding recipes')
-      }
+  connection.query('INSERT INTO categories_recipes SET ?', req.body, err => {
+    if (err) {
+      console.log(err)
+      res.status(500).send('Error adding recipes')
+    } else {
+      res.status(200).send('Success adding recipes')
     }
-  )
+  })
 })
 
 router.put('/:id', (req, res) => {
@@ -42,7 +38,7 @@ router.put('/:id', (req, res) => {
   connection.query(
     'UPDATE categories_recipes SET ? WHERE id=?',
     [newName, id],
-    (err, results) => {
+    err => {
       if (err) {
         console.log(err)
         res.status(500).send('Error updating a recipes')
