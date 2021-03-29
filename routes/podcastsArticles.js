@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     'SELECT * FROM podcasts_articles pa JOIN categories_podcast_article_has_podcasts_articles cap ON cap.podcasts_articles_id = pa.id'
   const sqlValues = []
   if (req.query.id != null) {
-    sql += ' WHERE categories_podcast_article_id = ?'
+    sql += ' WHERE categories_podcasts_articles_id = ?'
     sqlValues.push(req.query.id)
   }
   connection.query(sql, sqlValues, (err, results) => {
