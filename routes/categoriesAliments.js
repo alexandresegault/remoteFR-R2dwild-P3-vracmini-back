@@ -1,9 +1,17 @@
 const express = require('express')
 const connection = require('../src/config')
 const router = express.Router()
+const app = express()
+
+app.use(express.json())
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+)
 
 router.get('/', (req, res) => {
-  connection.query('SELECT * FROM connexion_admin', (err, results) => {
+  connection.query('SELECT * FROM categories_aliments', (err, results) => {
     if (err) {
       res.status(500).send('Error retrieving data')
     } else {
@@ -11,4 +19,5 @@ router.get('/', (req, res) => {
     }
   })
 })
+
 module.exports = router
