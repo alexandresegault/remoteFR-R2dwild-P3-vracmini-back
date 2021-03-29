@@ -27,19 +27,14 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { content, name, title, url_img } = req.body
-  connection.query(
-    'INSERT INTO aliments(name, title, content, url_img) VALUES(?,?,?,?)',
-    [name, title, content, url_img],
-    (err, results) => {
-      if (err) {
-        console.log(err)
-        res.status(500).send('Error adding data')
-      } else {
-        res.status(200).send('Success adding data !')
-      }
+  connection.query('INSERT INTO aliments SET ?', [req.body], err => {
+    if (err) {
+      console.log(err)
+      res.status(500).send('Error adding data')
+    } else {
+      res.status(200).send('Success adding data !')
     }
-  )
+  })
 })
 
 module.exports = router
