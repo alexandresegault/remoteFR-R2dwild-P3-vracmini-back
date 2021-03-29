@@ -18,7 +18,7 @@ router.put('/:id', (req, res) => {
   connection.query(
     'UPDATE aux_fourneaux SET ? WHERE id = ?',
     [newPage, id],
-    (err, results) => {
+    err => {
       if (err) {
         console.log(err)
         res.status(500).send('Error updating page')
@@ -28,4 +28,5 @@ router.put('/:id', (req, res) => {
     }
   )
 })
+
 module.exports = router

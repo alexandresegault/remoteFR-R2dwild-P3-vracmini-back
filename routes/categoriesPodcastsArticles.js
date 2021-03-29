@@ -1,18 +1,10 @@
 const express = require('express')
 const connection = require('../src/config')
-const app = express()
 const router = express.Router()
-
-app.use(express.json())
-app.use(
-  express.urlencoded({
-    extended: true
-  })
-)
 
 router.get('/', (req, res) => {
   connection.query(
-    'SELECT * FROM categories_podcast_article ',
+    'SELECT * FROM categories_podcasts_articles ',
     (err, results) => {
       if (err) {
         res.status(500).send('Error retrieving data')
@@ -23,11 +15,10 @@ router.get('/', (req, res) => {
   )
 })
 router.post('/', (req, res) => {
-  const { name } = req.body
   connection.query(
-    'INSERT INTO categories_podcast_article(name) VALUES (?)',
-    [name],
-    (err, results) => {
+    'INSERT INTO categories_podcasts_articles SET ?',
+    req.body,
+    err => {
       if (err) {
         console.log(err)
         res.status(500).send('Error adding a category')
@@ -41,9 +32,9 @@ router.put('/:id', (req, res) => {
   const id = req.params.id
   const newCategorie = req.body
   connection.query(
-    'UPDATE categories_podcast_article SET ? WHERE id = ?',
+    'UPDATE categories_podcasts_articles SET ? WHERE id = ?',
     [newCategorie, id],
-    (err, results) => {
+    err => {
       if (err) {
         console.log(err)
         res.status(500).send('Error updating a category')
@@ -56,9 +47,9 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const id = req.params.id
   connection.query(
-    'DELETE FROM categories_podcast_article WHERE id = ?',
+    'DELETE FROM categories_podcasts_articles WHERE id = ?',
     [id],
-    (err, results) => {
+    err => {
       if (err) {
         console.log(err)
         res.status(500).send('Error deleting a category')
@@ -68,4 +59,5 @@ router.delete('/:id', (req, res) => {
     }
   )
 })
+
 module.exports = router
