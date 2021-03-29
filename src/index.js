@@ -43,8 +43,8 @@ app.use(
   }
 )
 app.use(
-  '/api/aux_fourneaux/categorie_recettes',
-  routes.categorieRecettes,
+  '/api/aux_fourneaux/categorie_recipes',
+  routes.categorieRecipes,
   function (req, res, next) {
     next()
   }
@@ -74,9 +74,10 @@ app.use(
     next()
   }
 )
+
 app.use(
-  '/api/aux_fourneaux/categorie_recettes/recettes',
-  routes.recettes,
+  '/api/aux_fourneaux/recipes',
+  routes.recipes,
   function (req, res, next) {
     next()
   }
