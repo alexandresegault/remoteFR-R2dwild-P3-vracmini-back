@@ -26,7 +26,7 @@ app.use('/api/about_us', routes.aboutUs, function (req, res, next) {
   next()
 })
 app.use(
-  '/api/aux_fourneaux/categorie_aliments/aliments',
+  '/api/aux_fourneaux/aliments',
   routes.aliments,
   function (req, res, next) {
     next()
@@ -68,7 +68,7 @@ app.use('/api/contact', routes.contact, function (req, res, next) {
 })
 
 app.use(
-  '/api/categorie_podcast_article/podcasts_article',
+  '/api/podcasts_article',
   routes.podcastsArticle,
   function (req, res, next) {
     next()
