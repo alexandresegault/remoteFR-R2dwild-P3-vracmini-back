@@ -11,7 +11,15 @@ app.use(
 )
 
 router.get('/', (req, res) => {
-  connection.query('SELECT * FROM aliments', (err, results) => {
+
+  let sql = 'SELECT * FROM aliments'
+  const sqlValues = []
+  if (req.query.categories_aliments_id) {
+    sql += ' WHERE categories_aliments_id = ?'
+    sqlValues.push(req.query.categories_aliments_id)
+  }
+  connection.query(sql, sqlValues, (err, results) => {
+
     if (err) {
       res.status(500).send('Error retrieving data')
     } else {
@@ -20,6 +28,7 @@ router.get('/', (req, res) => {
   })
 })
 
+<<<<<<< HEAD
 router.post('/', (req, res) => {
   const { content, name, url_img } = req.body
   connection.query(
@@ -35,5 +44,25 @@ router.post('/', (req, res) => {
     }
   )
 })
+=======
+
+router.get('/:id', (req, res) => {
+  const alimentId = req.params.id
+  connection.query(
+    'SELECT * FROM aliments WHERE id = ?',
+    [alimentId],
+    (err, results) => {
+      if (err) {
+        res.status(500).send(`An error occurred: ${err.message}`)
+      }
+      if (results.length === 0) {
+        return res.status(404).send('Aliment not found')
+      }
+      return res.json(results[0])
+    }
+  )
+})
+
+>>>>>>> 06f3b15cee338ca3e8a4096d3cb4e955ea026113
 
 module.exports = router

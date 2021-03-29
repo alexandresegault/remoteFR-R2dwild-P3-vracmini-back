@@ -6,7 +6,7 @@ const categorieRecettes = require('./categorieRecettes')
 const categoriePodcastArticle = require('./categoriePodcastArticle')
 const connexionAdmin = require('./connexionAdmin')
 const contact = require('./contact')
-const podcastArticle = require('./podcastsArticle')
+const podcastsArticle = require('./podcastsArticle')
 const recettes = require('./recettes')
 const vracNCo = require('./vracNCo')
 
@@ -19,7 +19,7 @@ module.exports = {
   categoriePodcastArticle,
   connexionAdmin,
   contact,
-  podcastArticle,
+  podcastsArticle,
   recettes,
   vracNCo
 }

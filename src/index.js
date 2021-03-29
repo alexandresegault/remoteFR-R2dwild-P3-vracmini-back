@@ -13,6 +13,7 @@ app.use(
     extended: true
   })
 )
+app.use(cors('*'))
 
 connection.connect(function (err) {
   if (err) {
@@ -71,7 +72,7 @@ app.use('/api/contact', routes.contact, function (req, res, next) {
 
 app.use(
   '/api/categorie_podcast_article/podcasts_article',
-  routes.podcastArticle,
+  routes.podcastsArticle,
   function (req, res, next) {
     next()
   }
