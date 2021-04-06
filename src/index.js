@@ -5,7 +5,6 @@ const routes = require('../routes/index')
 const port = 4242
 const app = express()
 
-
 app.use(cors('*'))
 app.use(express.json())
 app.use(
@@ -23,42 +22,54 @@ connection.connect(function (err) {
   console.log('connected as id ' + connection.threadId)
 })
 
-
-
 app.use('/api/about_us', routes.aboutUs, function (req, res, next) {
   next()
 })
+
 app.use(
-  '/api/aux_fourneaux/categorie_aliments/aliments',
+  '/api/aux_fourneaux/aliments',
   routes.aliments,
   function (req, res, next) {
     next()
   }
 )
+
 app.use('/api/aux_fourneaux', routes.auxFourneaux, function (req, res, next) {
   next()
 })
+
 app.use(
-  '/api/aux_fourneaux/categorie_aliments',
-  routes.categorieAlim,
+  '/api/aux_fourneaux/categories_aliments',
+  routes.categoriesAliments,
   function (req, res, next) {
     next()
   }
 )
+
 app.use(
-  '/api/aux_fourneaux/categorie_recettes',
-  routes.categorieRecettes,
+  '/api/aux_fourneaux/categories_recipes',
+  routes.categoriesRecipes,
   function (req, res, next) {
     next()
   }
 )
+
 app.use(
-  '/api/categorie_podcast_article',
-  routes.categoriePodcastArticle,
+  '/api/aux_fourneaux/recipes',
+  routes.recipes,
   function (req, res, next) {
     next()
   }
 )
+
+app.use(
+  '/api/categories_podcasts_articles',
+  routes.categoriesPodcastsArticles,
+  function (req, res, next) {
+    next()
+  }
+)
+
 app.use(
   '/api/connexion_admin',
   routes.connexionAdmin,
@@ -66,20 +77,14 @@ app.use(
     next()
   }
 )
+
 app.use('/api/contact', routes.contact, function (req, res, next) {
   next()
 })
 
 app.use(
-  '/api/categorie_podcast_article/podcasts_article',
-  routes.podcastsArticle,
-  function (req, res, next) {
-    next()
-  }
-)
-app.use(
-  '/api/aux_fourneaux/categorie_recettes/recettes',
-  routes.recettes,
+  '/api/podcasts_articles',
+  routes.podcastsArticles,
   function (req, res, next) {
     next()
   }
@@ -94,5 +99,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Server is runing on 4242`)
+  console.log(`Server is runing on ${port}`)
 })

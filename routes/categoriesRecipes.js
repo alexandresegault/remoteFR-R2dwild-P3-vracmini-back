@@ -11,7 +11,7 @@ app.use(
 )
 
 router.get('/', (req, res) => {
-  connection.query('SELECT * FROM categorie_recipes', (err, results) => {
+  connection.query('SELECT * FROM categories_recipes', (err, results) => {
     if (err) {
       console.log(err)
       res.status(500).send('Error retrieving data')
@@ -22,28 +22,23 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { name } = req.body
-  connection.query(
-    'INSERT INTO categorie_recipes(name) VALUES (?)',
-    [name],
-    (err, result) => {
-      if (err) {
-        console.log(err)
-        res.status(500).send('Error adding recipes')
-      } else {
-        res.status(200).send('Success adding recipes')
-      }
+  connection.query('INSERT INTO categories_recipes SET ?', req.body, err => {
+    if (err) {
+      console.log(err)
+      res.status(500).send('Error adding recipes')
+    } else {
+      res.status(200).send('Success adding recipes')
     }
-  )
+  })
 })
 
 router.put('/:id', (req, res) => {
   const id = req.params.id
   const newName = req.body
   connection.query(
-    'UPDATE categorie_recipes SET ? WHERE id=?',
+    'UPDATE categories_recipes SET ? WHERE id=?',
     [newName, id],
-    (err, results) => {
+    err => {
       if (err) {
         console.log(err)
         res.status(500).send('Error updating a recipes')
@@ -57,7 +52,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const idRecipe = req.params.id
   connection.query(
-    'DELETE FROM categorie_recipes WHERE id = ?',
+    'DELETE FROM categories_recipes WHERE id = ?',
     [idRecipe],
     err => {
       if (err) {

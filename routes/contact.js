@@ -1,14 +1,6 @@
 const express = require('express')
 const connection = require('../src/config')
-const app = express()
 const router = express.Router()
-
-app.use(express.json())
-app.use(
-  express.urlencoded({
-    extended: true
-  })
-)
 
 router.get('/', (req, res) => {
   connection.query('SELECT * FROM contact ', (err, results) => {
@@ -19,4 +11,5 @@ router.get('/', (req, res) => {
     }
   })
 })
+
 module.exports = router
