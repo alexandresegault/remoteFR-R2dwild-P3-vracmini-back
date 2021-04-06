@@ -34,7 +34,12 @@ router.get('/:id', (req, res) => {
     }
   )
 })
-
+router.get('/search', (req, res) => {
+  connection.query('SELECT * FROM aliments', (err, results) => {
+    const tab = results.filter(e => e.name.includes(req.query.name))
+    err ? res.status(404).send('Error retrieving data') : res.json(tab)
+  })
+})
 router.post('/', (req, res) => {
   connection.query('INSERT INTO aliments SET ?', req.body, err => {
     if (err) {

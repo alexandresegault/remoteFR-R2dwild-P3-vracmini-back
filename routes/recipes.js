@@ -22,7 +22,12 @@ router.get('/:id', (req, res) => {
     }
   })
 })
-
+router.get('/search', (req, res) => {
+  connection.query('SELECT * FROM recipes', (err, results) => {
+    const tab = results.filter(e => e.title.includes(req.query.title))
+    err ? res.status(404).send('Error retrieving data') : res.json(tab)
+  })
+})
 router.post('/', (req, res) => {
   connection.query('INSERT INTO recipes SET ?', req.body, (err, results) => {
     if (err) {
