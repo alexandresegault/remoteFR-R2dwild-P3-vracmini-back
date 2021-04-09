@@ -17,7 +17,17 @@ router.get('/', (req, res) => {
     }
   })
 })
-
+router.get('/search', (req, res) => {
+  connection.query('SELECT * FROM recipes', (err, results) => {
+    err
+      ? res.status(404).send('Error retrieving data')
+      : res
+          .status(200)
+          .json(
+            results.filter(recipe => recipe.title.includes(req.query.title))
+          )
+  })
+})
 router.get('/:id', (req, res) => {
   const id = req.params.id
   connection.query('SELECT * FROM recipes WHERE id = ?', id, (err, results) => {

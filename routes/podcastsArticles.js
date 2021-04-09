@@ -16,7 +16,15 @@ router.get('/', (req, res) => {
       : res.status(200).json(results)
   })
 })
-
+router.get('/search', (req, res) => {
+  connection.query('SELECT * FROM podcasts_articles', (err, results) => {
+    err
+      ? res.status(404).send('Error retrieving data')
+      : res.json(
+          results.filter(podart => podart.title.includes(req.query.title))
+        )
+  })
+})
 router.get('/:id', (req, res) => {
   const articleId = req.params.id
   connection.query(

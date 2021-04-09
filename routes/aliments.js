@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
     }
   })
 })
+
 router.post('/', (req, res) => {
   connection.query('INSERT INTO aliments SET ?', [req.body], err => {
     if (err) {
@@ -25,6 +26,16 @@ router.post('/', (req, res) => {
     } else {
       res.status(200).send('Success adding data !')
     }
+  })
+})
+
+router.get('/search', (req, res) => {
+  connection.query('SELECT * FROM aliments', (err, results) => {
+    err
+      ? res.status(404).send('Error retrieving data')
+      : res
+          .status(200)
+          .json(results.filter(alim => alim.name.includes(req.query.name)))
   })
 })
 
