@@ -3,7 +3,13 @@ const connection = require('../src/config')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  connection.query('SELECT * FROM recipes', (err, results) => {
+  let sql = 'SELECT * FROM recipes'
+  let sqlValues = []
+  if (req.query.categories_recipes_id) {
+    sql += ' WHERE categories_recipes_id = ?'
+    sqlValues.push(req.query.categories_recipes_id)
+  }
+  connection.query(sql, sqlValues, (err, results) => {
     if (err) {
       res.status(500).send('Error retrieving data')
     } else {
