@@ -5,9 +5,9 @@ const router = express.Router()
 router.get('/', (req, res) => {
   let sql = 'SELECT * FROM aliments'
   const sqlValues = []
-  if (req.params.categories_aliments_id) {
+  if (req.query.categories_aliments_id) {
     sql += ' WHERE categories_aliments_id = ?'
-    sqlValues.push(req.params.categories_aliments_id)
+    sqlValues.push(req.query.categories_aliments_id)
   }
   connection.query(sql, sqlValues, (err, results) => {
     if (err) {
@@ -29,10 +29,10 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-  const alimentId = req.params.id
+  const id = req.params.id
   connection.query(
     'SELECT * FROM aliments WHERE id = ?',
-    [alimentId],
+    id,
     (err, results) => {
       if (err) {
         res.status(500).send(`An error occurred: ${err.message}`)
@@ -60,7 +60,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const id = req.params.id
-  connection.query('DELETE aliments WHERE id=?', id, (err, results) => {
+  connection.query('DELETE FROM aliments WHERE id=?', id, (err, results) => {
     if (err) {
       res.status(500).send('Error deleting data')
     } else {

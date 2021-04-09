@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   const id = req.params.id
   connection.query(
-    'UPDATE categories_aliments WHERE id=?',
+    'UPDATE categories_aliments SET ? WHERE id=?',
     [req.body, id],
     (err, results) => {
       if (err) {
@@ -47,7 +47,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const id = req.params.id
-  connection.query('DELETE categories_aliments WHERE id=?', id, err => {
+  connection.query('DELETE FROM categories_aliments WHERE id=?', id, err => {
     if (err) {
       res.status(500).send('Error deleting data')
     } else {
