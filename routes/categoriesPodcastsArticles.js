@@ -28,6 +28,7 @@ router.post('/', (req, res) => {
     }
   )
 })
+
 router.put('/:id', (req, res) => {
   const id = req.params.id
   const newCategorie = req.body
