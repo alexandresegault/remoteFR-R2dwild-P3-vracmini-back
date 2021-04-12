@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
     }
   )
 })
+
 router.post('/', (req, res) => {
   connection.query(
     'INSERT INTO categories_podcasts_articles SET ?',
