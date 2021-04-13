@@ -16,7 +16,6 @@ router.get('/', (req, res) => {
       : res.status(200).json(results)
   })
 })
-
 router.get('/search', (req, res) => {
   connection.query('SELECT * FROM podcasts_articles', (err, results) => {
     err

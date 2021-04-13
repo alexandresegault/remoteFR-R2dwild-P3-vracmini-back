@@ -12,6 +12,16 @@ router.get('/', (req, res) => {
   })
 })
 
+router.post('/', (req, res) => {
+  connection.query('INSERT INTO aux_fourneaux SET ?', req.body, err => {
+    if (err) {
+      res.status(500).send('Error adding data')
+    } else {
+      res.status(200).send('Data successfully added')
+    }
+  })
+})
+
 router.put('/:id', (req, res) => {
   const newPage = req.body
   const id = req.params.id
