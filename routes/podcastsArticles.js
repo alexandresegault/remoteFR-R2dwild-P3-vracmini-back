@@ -25,6 +25,29 @@ router.get('/search', (req, res) => {
         )
   })
 })
+
+router.get('/article', (req, res) => {
+  let sql = 'SELECT * FROM podcasts_articles WHERE isPodcast=0'
+  connection.query(sql, (err, results) => {
+    if (err) {
+      res.status(500).send(`An error occured : ${err}`)
+    } else {
+      res.status(200).json(results)
+    }
+  })
+})
+
+router.get('/podcast', (req, res) => {
+  let sql = 'SELECT * FROM podcasts_articles WHERE isPodcast=1'
+  connection.query(sql, (err, results) => {
+    if (err) {
+      res.status(500).send(`An error occured : ${err}`)
+    } else {
+      res.status(200).json(results)
+    }
+  })
+})
+
 router.get('/:id', (req, res) => {
   const articleId = req.params.id
   connection.query(
@@ -42,4 +65,89 @@ router.get('/:id', (req, res) => {
   )
 })
 
+router.post('/', (req, res) => {
+  const { title, url_img, content, isPodcast } = req.body
+  const { categories_podcasts_articles_id } = req.body
+  const values = { title, url_img, content, isPodcast }
+  connection.query(
+    'INSERT INTO podcasts_articles SET ?',
+    [values],
+    (err, results) => {
+      if (err) {
+        res.status(500).send('Error adding data')
+      } else {
+        const podcasts_articles_id = results.insertId
+        const values2 = {
+          categories_podcasts_articles_id,
+          podcasts_articles_id
+        }
+        connection.query(
+          'INSERT INTO categories_podcasts_articles_has_podcasts_articles SET ?',
+          [values2],
+          err => {
+            if (err) {
+              console.log(err)
+              res.status(500).send('Error joining data')
+            } else {
+              res
+                .status(200)
+                .send('successfully joining categories_podcasts_articles')
+            }
+          }
+        )
+      }
+    }
+  )
+})
+
+router.put('/:id', (req, res) => {
+  connection.query(
+    'UPDATE podcasts_articles SET ? WHERE id= ?',
+    [req.body, req.params.id],
+    err => {
+      if (err) {
+        res.status(500).send('Error retrieving data')
+      } else {
+        res.status(200).send('Article/Podcast successfully update')
+      }
+    }
+  )
+})
+router.put('/join/:id', (req, res) => {
+  connection.query(
+    'UPDATE categories_podcasts_articles_has_podcasts_articles cpahpa SET ? WHERE cpahpa.podcasts_articles_id = ? ',
+    [req.body, req.params.id],
+    err => {
+      if (err) {
+        res.status(500).send('Error retrieving data')
+      } else {
+        res.status(200).send('Categorie succesfuly update')
+      }
+    }
+  )
+})
+router.delete('/:id', (req, res) => {
+  const id = req.params.id
+  connection.query(
+    'DELETE FROM categories_podcasts_articles_has_podcasts_articles cpahpa WHERE cpahpa.podcasts_articles_id = ? ',
+    [id],
+    err => {
+      if (err) {
+        res.status(500).send('Error separate data')
+      } else {
+        connection.query(
+          'DELETE FROM podcasts_articles WHERE id = ?',
+          [id],
+          err => {
+            if (err) {
+              res.status(500).send('Error deleting data ')
+            } else {
+              res.status(200).send('Succesfuly deleting article/podcast')
+            }
+          }
+        )
+      }
+    }
+  )
+})
 module.exports = router

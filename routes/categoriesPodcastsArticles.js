@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
     }
   )
 })
+
 router.post('/', (req, res) => {
   connection.query(
     'INSERT INTO categories_podcasts_articles SET ?',
@@ -28,6 +29,7 @@ router.post('/', (req, res) => {
     }
   )
 })
+
 router.put('/:id', (req, res) => {
   const id = req.params.id
   const newCategorie = req.body
