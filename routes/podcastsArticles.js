@@ -127,5 +127,28 @@ router.put('/join/:id', (req, res) => {
     }
   )
 })
-
+router.delete('/:id', (req, res) => {
+  const id = req.params.id
+  connection.query(
+    'DELETE FROM categories_podcasts_articles_has_podcasts_articles cpahpa WHERE cpahpa.podcasts_articles_id = ? ',
+    [id],
+    err => {
+      if (err) {
+        res.status(500).send('Error separate data')
+      } else {
+        connection.query(
+          'DELETE FROM podcasts_articles WHERE id = ?',
+          [id],
+          err => {
+            if (err) {
+              res.status(500).send('Error deleting data ')
+            } else {
+              res.status(200).send('Succesfuly deleting article/podcast')
+            }
+          }
+        )
+      }
+    }
+  )
+})
 module.exports = router
