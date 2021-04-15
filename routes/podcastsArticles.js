@@ -65,6 +65,20 @@ router.get('/:id', (req, res) => {
   )
 })
 
+router.get('/join/:id', (req, res) => {
+  connection.query(
+    'SELECT * FROM categories_podcasts_articles_has_podcasts_articles cpahpa WHERE cpahpa.podcasts_articles_id = ? ',
+    [req.params.id],
+    (err, results) => {
+      if (err) {
+        res.status(500).send('Error retrieving data')
+      } else {
+        res.status(200).json(results)
+      }
+    }
+  )
+})
+
 router.post('/', (req, res) => {
   const { title, url_img, content, isPodcast } = req.body
   const { categories_podcasts_articles_id } = req.body
@@ -113,15 +127,30 @@ router.put('/:id', (req, res) => {
     }
   )
 })
-router.put('/join/:id', (req, res) => {
+router.post('/join', (req, res) => {
   connection.query(
-    'UPDATE categories_podcasts_articles_has_podcasts_articles cpahpa SET ? WHERE cpahpa.podcasts_articles_id = ? ',
-    [req.body, req.params.id],
+    'INSERT INTO categories_podcasts_articles_has_podcasts_articles SET ? ',
+    [req.body],
     err => {
       if (err) {
         res.status(500).send('Error retrieving data')
       } else {
         res.status(200).send('Categorie succesfuly update')
+      }
+    }
+  )
+})
+router.delete('/join/:id/:catId', (req, res) => {
+  connection.query(
+    'DELETE FROM categories_podcasts_articles_has_podcasts_articles cpahpa WHERE cpahpa.podcasts_articles_id = ? AND cpahpa.categories_podcasts_articles_id = ?',
+    [req.params.id, req.params.catId],
+    err => {
+      if (err) {
+        res.status(500).send('Error retrieving data')
+      } else {
+        res
+          .status(200)
+          .send('Succesfuly remove categorie from podcasts/articles')
       }
     }
   )
