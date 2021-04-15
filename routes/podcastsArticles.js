@@ -91,26 +91,25 @@ router.post('/', (req, res) => {
         res.status(500).send('Error adding data')
       } else {
         const podcasts_articles_id = results.insertId
+        const values = []
         categories_podcasts_articles_id.forEach(elem => {
-          const values2 = {
-            podcasts_articles_id,
-            categories_podcasts_articles_id: elem
-          }
-          connection.query(
-            'INSERT INTO categories_podcasts_articles_has_podcasts_articles SET ?',
-            [values2],
-            err => {
-              if (err) {
-                console.log(err)
-                res.status(500).send('Error joining data')
-              } else {
-                res
-                  .status(200)
-                  .send('successfully joining categories_podcasts_articles')
-              }
-            }
-          )
+          let values2 = [elem, podcasts_articles_id]
+          values.push(values2)
         })
+        connection.query(
+          'INSERT INTO `minimal`.`categories_podcasts_articles_has_podcasts_articles` (`categories_podcasts_articles_id`, `podcasts_articles_id`) VALUES ?',
+          [values],
+          err => {
+            if (err) {
+              console.log(err)
+              res.status(500).send('Error joining data')
+            } else {
+              res
+                .status(200)
+                .send('successfully joining categories_podcasts_articles')
+            }
+          }
+        )
       }
     }
   )
