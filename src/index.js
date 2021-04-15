@@ -1,9 +1,11 @@
 const express = require('express')
 const cors = require('cors')
+const app = express()
+
+const authRouter = require('../routes/auth.js')
 const connection = require('../src/config')
 const routes = require('../routes/index')
 const port = 4242
-const app = express()
 
 app.use(cors('*'))
 app.use(express.json())
@@ -12,7 +14,7 @@ app.use(
     extended: true
   })
 )
-app.use(cors('*'))
+app.use('/auth', authRouter)
 
 connection.connect(function (err) {
   if (err) {
@@ -92,10 +94,6 @@ app.use(
 
 app.use('/api/vracn_co', routes.vracNCo, function (req, res, next) {
   next()
-})
-
-app.get('/', (req, res) => {
-  res.send('Chicken World!')
 })
 
 app.listen(port, () => {
